@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsf/core">
+
+
+<head>
+    <title><h:outputText value="#{msg.welcomeTitle}" /></title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+     
+</head>
+
+<body style="background-color:#ffe6cc;">
+<h3><h:outputText value="#{msg.welcomeHeading}" /></h3>
+<p><h:outputText value="#{msg.welcomeMessage}" /></p>
+<h1 class="title">Search Box</h1>
+<br></br>
+<h:form id="form">
+<div align="center"> 
+ <h:panelGrid id="panel" columns="2" border="4" cellpadding="8" cellspacing="6" width="40%">
+	  <f:facet name="header">
+	  		<h:outputText value="Enter Value"/>
+	 </f:facet>
+  
+<h:outputLabel for="rollid">Roll Id:</h:outputLabel>
+<h:inputText id="rollid" value="#{bean.rollid}"></h:inputText>
+
+<h:outputLabel for="name">Name:</h:outputLabel>
+<h:inputText id="name" value="#{bean.name}"></h:inputText>
+
+<h:outputLabel for="name">Email:</h:outputLabel>
+<h:inputText id="email" value="#{bean.email}"></h:inputText>
+
+
+
+	<f:facet name="footer">
+			<h:panelGroup style="display:block; text-align:center">
+	 		<h:commandButton value="Search"  action="#{bean.searched()}"></h:commandButton>
+			<h:commandButton value="Add"  action="#{bean.add()}"></h:commandButton>
+			<h:commandButton value="Reset"  action="#{bean.reset()}"></h:commandButton>
+			</h:panelGroup>
+	</f:facet>
+</h:panelGrid>
+</div>
+    
+ <br></br>
+<div align="center" style="color:red"> 
+  <h:outputText value="#{bean.msg}"></h:outputText>
+</div>
+
+<br></br>
+ 
+<div align="center" >
+ 
+<h:dataTable  value="#{bean.display}" var="result" border="2"
+            cellpadding="8" cellspacing="6" width="30%" bgcolor="pink">
+            
+            <h:column>
+                <c:facet name="header">Roll ID</c:facet>
+                   <h:outputText value="#{result.rollid}"></h:outputText>
+                </h:column>
+            <h:column>
+                <c:facet name="header">Name</c:facet>
+                   <h:outputText value="#{result.name}"></h:outputText>
+                </h:column>
+             <h:column>
+                <c:facet name="header">E-mail</c:facet>
+                 	<h:outputText value="#{result.email}"></h:outputText>
+                </h:column>
+            
+             <h:column>
+                <c:facet name="header">Status</c:facet>
+                    <h:commandLink id="status" action="#{bean.status(result.rollid,result.status)}">
+                      
+   						 <h:outputText value="#{result.status}"></h:outputText>  
+   					 </h:commandLink>                      
+                </h:column>   
+                
+                
+</h:dataTable>
+ 
+</div>
+</h:form>
+
+</body>
+</html>
